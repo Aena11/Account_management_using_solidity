@@ -6,7 +6,7 @@ contract AccountMangement{
     constructor(address payable _owner) public {
         owner = _owner;
     }
-    modifier onlyOwner {
+     modifier onlyOwner {
       require(msg.sender == owner);
       _;
    }
@@ -15,16 +15,16 @@ contract AccountMangement{
 
     struct Addr{
         
-        bytes32  line_1;
-        bytes32  line_2;
-        bytes32  city;
-        bytes32  state;
+        string line_1;
+        string line_2;
+        string city;
+        string state;
         uint256 pincode;
     }
     
     struct User{
-        bytes32  fName;
-        bytes32  lName;
+        string fName;
+        string lName;
         uint256 age;
         gender Gender;
         Addr addr;
@@ -36,9 +36,8 @@ contract AccountMangement{
 
 
 
-function create_account( bytes32   _fName, bytes32  _lName, uint256 _age,
-gender _gender, bytes32   _line1, bytes32   _line2, bytes32   _city, bytes32   _state, uint256 _pincode  ) public onlyOwner {
-    
+function createUser( string memory _fName, string memory _lName, uint256 _age,
+gender _gender, string memory _line1, string memory _line2, string memory _city, string memory _state, uint256 _pincode  ) public onlyOwner {
     User storage user = users[owner];
     exist[owner] = true;
     
@@ -57,9 +56,8 @@ gender _gender, bytes32   _line1, bytes32   _line2, bytes32   _city, bytes32   _
  
  
  //edit account
- function edit_account(bytes32   _fName, bytes32   _lName, uint256 _age, gender _gender,bytes32   _line1, 
- bytes32   _line2, bytes32   _city, bytes32   _state, uint256 _pincode)public onlyOwner{
-    
+ function edit_account(string memory _fName, string memory _lName, uint256 _age, gender _gender,string memory _line1, 
+ string memory _line2, string memory _city, string memory _state, uint256 _pincode)public onlyOwner {
      if(exist[owner] == true){
      
 
@@ -83,7 +81,6 @@ gender _gender, bytes32   _line1, bytes32   _line2, bytes32   _city, bytes32   _
     //deposite balance
   function deposit() payable public {
   }
-    //ethereum to any given account 
   function send(address payable to, uint amount) public {
     if(msg.sender == owner) {
       to.transfer(amount);
